@@ -125,13 +125,12 @@ console.log(selfMadePush(stuff, {
 let arrNum = [1,2,3,4,5]
 
 const selfMadeIncludes = (array, el) => {
-  let result = false;
     for (let i = 0; i < array.length; i++) {
         if(array[i] === el) {
-            result = true
+            return true
         }
     }
-  return result
+  return false
 }
 
 console.log(selfMadeIncludes(arrNum, 3))
