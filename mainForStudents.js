@@ -95,24 +95,24 @@ let deepCopySuperUser = {
 let sortedByScores = [...students.sort((a, b) => {
     return a.scores < b.scores ? 1 : -1
 })]
-console.log(sortedByScores);
+// console.log(sortedByScores);
 
 //5. Сформируйте массив студентов, у которых 100 и более баллов (filter)
 let bestStudents = students.filter(st => st.scores >= 100)
-console.log(bestStudents)
+// console.log(bestStudents)
 
 //6. Сформируйте массив имён студентов (map)
 let studentsNames = students.map(st => st.name);
-console.log(studentsNames)
+// console.log(studentsNames)
 
 //7. Добавьте всем студентам свойство "isStudent" со значением true (map)
 let trueStudents = students.map(st => ({...st, isStudent: true}));
-console.log(trueStudents)
+// console.log(trueStudents)
 
 //8. Nick женился. Выполните соответствующие преобразование массива
 // students (map)
 let studentsWithMarriedNick = students.map(st => st.name === "Nick" ? {...st, isMarried: true} : st);
-console.log(studentsWithMarriedNick)
+// console.log(studentsWithMarriedNick)
 
 // Внесите  следующие изменения в объект superUser:
 // NB!!! Все преобразования выполняем иммьютабельно, если не сказано иное
@@ -122,14 +122,14 @@ let superUserCorrect1 = {
     ...superUser, friends: superUser.friends.filter(f => f.id !== 1)
 };
 
-console.log(superUserCorrect1)
+// console.log(superUserCorrect1)
 //10. поменяйте объекту с id=2 из массива  friends значение св-ва name на
 // "Donald"
 let superUserCorrect2 = {
     ...superUser, friends: superUser.friends.map(fr => fr.id === 2 ? {...fr, name: "Donald"} : fr)
 };
 
-console.log(superUserCorrect2)
+// console.log(superUserCorrect2)
 
 //11. добавьте в список друзей нового друга
 const newFriend = {
@@ -143,7 +143,7 @@ let superUserCorrect3 = {
     ...superUser, friends: [...superUser.friends, newFriend]
 }
 
-console.log(superUserCorrect3)
+// console.log(superUserCorrect3)
 
 // И поднимаем руку!!!!
 
@@ -157,11 +157,11 @@ for (let i = 1; i < students.length; i++) {
 }
 
 
-console.log(bestStudent)
+// console.log(bestStudent)
 
 //13. Найдите сумму баллов всех студентов (reduce)*
 let scoresSum = students.reduce((acc, student) => acc + student.scores, 0);
-console.log(scoresSum)
+// console.log(scoresSum)
 
 // 14. Д.З.:
 // Напишите функцию addFriends, которая принимает параметром массив students
@@ -172,7 +172,9 @@ const addFriends = (students) => {
     const studentsNames = students.map(stud => stud.name)
     return students.map(st => ({...st, friends: studentsNames.filter(name => name !== st.name)}))
 }
-console.log(addFriends(students));
+console.time('addFriends');
+addFriends(students);
+console.timeEnd('addFriends');
 
 // 15. Д.З.: Напишите функцию getBestStudents, которая принимает параметром
 // массив students  и количество лучших студентов, которое надо получить в
@@ -192,10 +194,10 @@ const getBestStudents = (students, a = 1) => {
     }
 
 }
-
-console.log(getBestStudents(students))
-console.log(getBestStudents(students, 2))
-console.log(getBestStudents(students, 13))
+//
+// console.log(getBestStudents(students))
+// console.log(getBestStudents(students, 2))
+// console.log(getBestStudents(students, 13))
 
 
 
