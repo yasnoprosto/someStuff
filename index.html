@@ -18,28 +18,50 @@
 <script src="promises/api.js"></script>
 <!--<script src="promises/promises16.js"></script>-->
 <script>
+    // const mcPr = () => api.getVacanciesCountFromMicrosoft()
+    //     .then(data => {
+    //         console.log(data)
+    //         return data;
+    //     });
+    //
+    // const gPr = () => api.getVacanciesCountFromGoogle()
+    //     .then(data => {
+    //         console.log(data)
+    //         return data;
+    //     });
+    // const itKamasutra = () => api.sendStudentsCountToItKamasutra(count)
+    //     .then(count => {
+    //         console.log(count)
+    //     })
+    //
+    // gPr()
+    //     .then(() => mcPr())
+    //     .then(() => itKamasutra())
+    //     .then(() => console.log("finished"))
 
 
-    const mcPr = () => api.getVacanciesCountFromMicrosoft()
-        .then(data => {
-            console.log(data)
-            return data;
-        });
+    const loadVacanciesPromiseAsync = async () => {
+        let msCount = await api.getVacanciesCountFromMicrosoft()
+        console.log(msCount)
+        let gCount = await api.getVacanciesCountFromGoogle()
+        console.log(gCount)
+        let studentsCount = await api.sendStudentsCountToItKamasutra(msCount + gCount)
+        console.log(studentsCount)
+    }
 
-    const gPr = () => api.getVacanciesCountFromGoogle()
-        .then(data => {
-            console.log(data)
-            return data;
-        });
-    const itKamasutra = () => api.sendStudentsCountToItKamasutra(count)
-        .then(count => {
-            console.log(count)
-        })
+    // loadVacanciesPromiseAsync()
 
-    gPr()
-        .then(() => mcPr())
-        .then(() => itKamasutra())
-        .then(() => console.log("finished"))
+    const loadVacanciesPromiseAsyncParallel = async () => {
+        let msPr = api.getVacanciesCountFromMicrosoft()
+        let gPr = api.getVacanciesCountFromGoogle()
+        let vacaniesCount = await Promise.all([msPr, gPr])
+        let studentsCount = await api.sendStudentsCountToItKamasutra(vacaniesCount[0] + vacaniesCount[1])
+        console.log(studentsCount)
+    }
+
+    loadVacanciesPromiseAsyncParallel()
+
+
 </script>
 </body>
 </html>
