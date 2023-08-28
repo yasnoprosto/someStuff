@@ -14,6 +14,32 @@
 </head>
 <body>
 
-<script defer src="promises15.js"></script>
+<script src="promises/axios.js"></script>
+<script src="promises/api.js"></script>
+<!--<script src="promises/promises16.js"></script>-->
+<script>
+
+
+    const mcPr = () => api.getVacanciesCountFromMicrosoft()
+        .then(data => {
+            console.log(data)
+            return data;
+        });
+
+    const gPr = () => api.getVacanciesCountFromGoogle()
+        .then(data => {
+            console.log(data)
+            return data;
+        });
+    const itKamasutra = () => api.sendStudentsCountToItKamasutra(count)
+        .then(count => {
+            console.log(count)
+        })
+
+    gPr()
+        .then(() => mcPr())
+        .then(() => itKamasutra())
+        .then(() => console.log("finished"))
+</script>
 </body>
 </html>
